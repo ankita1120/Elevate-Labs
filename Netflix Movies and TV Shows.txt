@@ -1,0 +1,97 @@
+1. What are missing values and how do you handle them?
+Missing values are data points that are empty or null in the dataset.
+Handling methods:
+
+Drop rows/columns (dropna()) when data is sparse or not useful.
+
+Impute values using mean, median, mode, or predictive models (fillna()).
+
+Leave them as-is if your model/analysis can handle them or they have significance.
+
+✅ In the Netflix dataset, we saw 10 missing entries in the date_added column.
+
+2. How do you treat duplicate records?
+Use .duplicated() to identify them.
+
+Use .drop_duplicates() to remove them.
+
+Make sure you consider whether full rows or certain columns define duplicates.
+
+✅ No duplicates were found in the Netflix dataset, but we checked with .duplicated().sum().
+
+3. Difference between dropna() and fillna() in Pandas?
+dropna(): Removes rows (or columns) that contain missing values.
+
+fillna(): Replaces missing values with a specified value (e.g., mean, 0, "Unknown").
+
+✅ Example:
+
+df.dropna(subset=['date_added'])       # drop rows where date_added is null
+df['country'].fillna('Unknown')        # fill null countries with 'Unknown'
+4. What is outlier treatment and why is it important?
+Outliers are values that are significantly different from the majority.
+They can:
+
+Skew distributions and statistical summaries.
+
+Impact the performance of machine learning models.
+
+Treatment options:
+
+Remove if data entry errors.
+
+Cap/floor based on percentiles or IQR.
+
+Transform (e.g., log scale).
+
+Model-based outlier detection (e.g., Isolation Forest).
+
+5. Explain the process of standardizing data.
+Standardizing ensures consistency across the dataset.
+Steps:
+
+Clean column names (e.g., lowercase, replace spaces with underscores).
+
+Trim whitespace and unify text formats (e.g., “US” vs “USA”).
+
+Ensure consistent data types (e.g., dates, numbers).
+
+Scale numerical values for modeling (optional).
+
+✅ In our Netflix task, we standardized column names and string fields like country, director, etc.
+
+6. How do you handle inconsistent data formats (e.g., date/time)?
+Use pd.to_datetime() to convert inconsistent strings to datetime format.
+
+Standardize separators (-, /, etc.) before conversion.
+
+Handle missing values with errors='coerce'.
+
+✅ We converted the date_added column to a proper datetime format.
+
+7. What are common data cleaning challenges?
+Missing values
+
+Duplicate records
+
+Inconsistent naming conventions
+
+Mixed data types in the same column
+
+Invalid values or outliers
+
+Encoding issues (e.g., special characters in text)
+
+8. How can you check data quality?
+.info() for data types and null counts
+
+.describe() for stats and outlier checks
+
+.value_counts() for distribution of categorical columns
+
+.isnull().sum() for missing values
+
+.duplicated().sum() for duplicates
+
+Visual checks: histograms, box plots, or bar charts
+
